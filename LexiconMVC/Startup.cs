@@ -17,11 +17,6 @@ namespace LexiconMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromSeconds(30);
-            });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,15 +29,9 @@ namespace LexiconMVC
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "fevercheck",
-                    pattern: "fevercheck",
-                    defaults: new { controller = "doctor", action = "index" }
-                );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"

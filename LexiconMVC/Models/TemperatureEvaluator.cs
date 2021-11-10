@@ -7,14 +7,21 @@ namespace LexiconMVC.Models
 {
     public static class TemperatureEvaluator
     {
-        public static string GetBodyTemperatureStatus(Temperature temp)
+        private static string tempResult;
+
+        public static string TempResult()
+        {
+            string temp = tempResult;
+            tempResult = "";
+            return temp;
+        }
+
+        public static void  GetBodyTemperatureStatus(Temperature temp)
         {
             if (temp.CurrentTemp == 0)
-                return "";
-
+                tempResult = "";
 
             double fever, hypothermia;
-
             if (temp.IsCelsius)
             {
                 fever = 38;
@@ -26,19 +33,16 @@ namespace LexiconMVC.Models
                 hypothermia = 95;
             }
 
-            if(temp.CurrentTemp < hypothermia)
-            {
-                return "You have hypothermia";
-            }
+            if (temp.CurrentTemp < hypothermia && temp.CurrentTemp > 0)
+                tempResult = "You have hypothermia";
+
+            if(temp.CurrentTemp >= hypothermia && temp.CurrentTemp <= fever)
+                tempResult = "Your body temperature is ok";
+
             if (temp.CurrentTemp > fever)
-            {
-                return "You have e fever";
-            }
-            else
-            {
-                return "Your body temperature is ok";
-            }
-           
+                tempResult = "You have a fever";
+
+            return;
         }
     }
 }

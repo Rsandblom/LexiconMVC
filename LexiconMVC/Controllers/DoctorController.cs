@@ -12,8 +12,8 @@ namespace LexiconMVC.Controllers
     {
         public ActionResult Index()
         {
-            
-            string resultMsg = HttpContext.Session.GetString("TempCheckResult");
+
+            string resultMsg = TemperatureEvaluator.TempResult();
             if(resultMsg == null || resultMsg == "")
                 ViewBag.Msg = null;
             else
@@ -26,8 +26,7 @@ namespace LexiconMVC.Controllers
         [HttpPost]
         public ActionResult Index(Temperature temperature)
         {
-            string bodyStatusMsg = TemperatureEvaluator.GetBodyTemperatureStatus(temperature);
-            HttpContext.Session.SetString("TempCheckResult", bodyStatusMsg);
+            TemperatureEvaluator.GetBodyTemperatureStatus(temperature);
             
             return RedirectToAction(nameof(Index));
         }

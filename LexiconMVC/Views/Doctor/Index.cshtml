@@ -6,7 +6,7 @@
 
 <h1>Temperature Check</h1>
 
-@if (@ViewBag.Msg != null)
+@if (ViewBag.Msg != null)
 {
     <h2>Result from temp check: @ViewBag.Msg</h2>
 }
@@ -23,7 +23,7 @@
             <input asp-for="CurrentTemp" />
         </div>
         <div>
-            <input type="submit" value="Check" />
+            <input type="submit" value="Check temp" />
         </div>
     </form>
 </div>

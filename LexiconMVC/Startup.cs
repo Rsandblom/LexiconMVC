@@ -17,10 +17,6 @@ namespace LexiconMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromSeconds(30);
-            });
 
         }
 
@@ -34,7 +30,6 @@ namespace LexiconMVC
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

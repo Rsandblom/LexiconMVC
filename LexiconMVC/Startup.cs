@@ -17,6 +17,10 @@ namespace LexiconMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(600);
+            });
 
         }
 
@@ -30,6 +34,7 @@ namespace LexiconMVC
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
@@ -38,6 +43,13 @@ namespace LexiconMVC
                     pattern: "fevercheck",
                     defaults: new { controller = "doctor", action = "index" }
                 );
+
+                endpoints.MapControllerRoute(
+                    name: "GuessingGame",
+                    pattern: "guessinggame",
+                    defaults: new { controller = "guessinggame", action = "index" }
+                );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
